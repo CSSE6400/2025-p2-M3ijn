@@ -1,15 +1,17 @@
-[tool.poetry]
-name = "2024-p2"
+[project]
+name = "practical02"
 version = "0.1.0"
 description = ""
-authors = []
+authors = [
+    {name = "Nguyen Duy Nam Khanh",email = "duynamkhanh.nguyen@student.uq.edu.au"}
+]
 readme = "README.md"
-
-[tool.poetry.dependencies]
-python = "^3.12"
-flask = "^3.0.2"
+requires-python = ">=3.10"
+dependencies = [
+    "flask (>=3.1.0,<4.0.0)"
+]
 
 
 [build-system]
-requires = ["poetry-core"]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
