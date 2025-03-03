@@ -29,7 +29,8 @@ def get_todos():
 
 @api.route('/todos/<int:todo_id>', methods=['GET'])
 def get_todo(todo_id):
-    todo = Todo.query.get(todo_id)
+    todo = db.session.get(Todo, todo_id)
+
     if todo is None:
         return jsonify({'error': 'Todo not found'}), 404
     return jsonify(todo.to_dict())
@@ -53,6 +54,7 @@ def create_todo():
         description=data.get('description'),
         completed=data.get('completed', False),
     )
+    
     if 'deadline_at' in data:
         try:
             todo.deadline_at = datetime.fromisoformat(request.json.get('deadline_at'))
@@ -65,7 +67,8 @@ def create_todo():
 
 @api.route('/todos/<int:todo_id>', methods=['PUT'])
 def update_todo(todo_id):
-    todo = Todo.query.get(todo_id)
+    todo = db.session.get(Todo, todo_id)
+
     if todo is None:
         return jsonify({'error': 'Todo not found'}), 404
     
@@ -100,7 +103,7 @@ def update_todo(todo_id):
 
 @api.route('/todos/<int:todo_id>', methods=['DELETE'])
 def delete_todo(todo_id):
-    todo = Todo.query.get(todo_id)
+    todo = db.session.get(Todo, todo_id)
     
     if todo is None:
         return jsonify({}), 200
