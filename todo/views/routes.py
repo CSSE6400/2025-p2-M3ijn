@@ -101,6 +101,7 @@ def update_todo(todo_id):
 @api.route('/todos/<int:todo_id>', methods=['DELETE'])
 def delete_todo(todo_id):
     todo = Todo.query.get(todo_id)
+    
     if todo is None:
         return jsonify({}), 200
 
